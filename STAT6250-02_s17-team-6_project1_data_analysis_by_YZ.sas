@@ -1,8 +1,8 @@
-[Dataset Name] Homicide Reports, 1980-2014
+[Dataset Name] Homicide Reports, 2000-2014
 
 [Experiment Units] Each agency
 
-[Number of observations] 638454
+[Number of observations] 236022
 
 [Number of Features] 24
 
