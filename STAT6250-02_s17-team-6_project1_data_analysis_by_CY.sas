@@ -4,24 +4,58 @@
 *******************************************************************************;
 
 *
-This file uses the following analytic dataset...
+This file uses the following analytic dataset to address several research
+questions regarding homicide incidences in the US from 2000-2014.
+Dataset Name: Homicide_analytic_file created in external file
+STAT6250-02_s17-team-6_project1_data_preparation.sas, which is assumed to be
+in the same directory as this file
+;
+
 See included file for dataset properties
 ;
 
+* environmental setup;
+
+* set relative file import path to current directory (using standard SAS trick
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
+
+* load external file that generates analytic dataset Homicide_analytic_file;
+%include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
 *
 Research Question: Since 1980, has national homicide rate increased or 
 decreased overall? Are there any state(s) that have trended differently from 
 the national 
 average?
+
 Rationale: Nowadays there’s narrative in the media that the country is 
 more dangerous than before - I would like to see if the trends shows this or 
 if it is more isolated incidences/areas
-Methodology: 
+
+Methodology: Use PROC MEANS to compute the mean number of Incidence
+for Year, and output the results to a temportatry dataset. Use PROC
+SORT extract and sort just the means the temporary dateset, and use PROC PRINT
+to print the temporary dataset.
+
+imitations: This methodology does not account for xxx
+
 Possible Follow-up Steps: 
 ;
-* code
 
+proc means mean noprint data=Homicide_analytic_file;
+    class Year;
+    var Incidence;
+    output out=Homicide_analytic_file_temp;
+run;
+
+proc sort data=Homicide_analytic_file_temp;
+    by ascending Year;
+run;
+
+proc print noobs data=Homicide_analytic_file_temp;
+    id Year;
+    var Incidence;
+run;
 
 *
 Research Question: Is there any significant relationship between the weapon 
