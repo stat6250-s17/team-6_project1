@@ -27,11 +27,11 @@ deleting row 1-402432 from worksheet "homicide database"
 
 * setup environmental parameters;
 %let inputDatasetURL =
-https://github.com/stat6250/team-6_project1/blob/master/Project%201%20dataset
+https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xlsx
 ;
 
 
-* load raw FRPM dataset over the wire;
+* load raw Homcidie dataset over the wire;
 filename tempfile TEMP;
 proc http
     method="get"
@@ -41,23 +41,23 @@ proc http
 run;
 proc import
     file=tempfile
-    out=project1_dataset_homicide_database-edited_raw
+    out=homicide_raw
     dbms=xls;
 run;
 filename tempfile clear;
 
 
-* check raw FRPM dataset for duplicates with respect to its composite key;
-proc sort nodupkey data=dataset homicide_database-edited_raw
-    dupout=dataset homicide_database-edited_raw_dups out=_null_;
-    by Year State City;
+* check raw Homicide dataset for duplicates with respect to its composite key;
+proc sort nodupkey data=homicide_raw
+    dupout=homicide_raw_dups out=_null_;
+    by Record ID;
 run;
 
 
-* build analytic dataset from FRPM dataset with the least number of columns and
+* build analytic dataset from Homicide dataset with the least number of columns and
 minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
-data homicide_database_analytic_file;
+data homicide_analytic_file;
     retain
         City
         State
@@ -100,6 +100,6 @@ data homicide_database_analytic_file;
         Victim Count
         Perpetrator Count
     ;
-    set homicide_database-edited_raw;s
+    set homicide_raw;s
 run;
 
