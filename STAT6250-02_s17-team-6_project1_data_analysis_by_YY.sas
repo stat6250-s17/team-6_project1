@@ -47,13 +47,22 @@ Rationale: This should help identify the most commonly used weapon.
 It could help the police to strengthen risk prevention,
 and the weapon management and control shall be strengthened.
 
-Methodolody: 
+Methodology: Use PROC SORT extract and sort the weapon from the dataset, 
+and use PROC PRINT to print the first three observations from the dataset.
 
-Limitations: 
+Limitations: This methodology does not account for districts with unknown data,
+nor does it attempt to validate data in any way.
 
-Possible Follow-up Steps: 
+Possible Follow-up Steps: More carefully clean the values of the variable
 ;
-* code
+proc sort data=Homicide_analytic_file(where=(weapon));
+    by descending Percent_weapon;
+run;
+
+proc print noobs data=Homicide_analytic_file(obs=3);
+    id weapon;
+    var Percent_weapon;
+run;
 
 
 *
