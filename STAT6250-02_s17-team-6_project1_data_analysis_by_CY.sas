@@ -69,7 +69,11 @@ Limitations:
 Possible Follow-up Steps: 
 ;
 
-* code
+proc means mean noprint data=Homicide_analytic_file;
+    class Victim Sex;
+    var Incidence;
+    output out=Homicide_analytic_file_temp;
+run;
 
 
 *
@@ -86,4 +90,9 @@ and the victim's ethncity.
 Limitations: 
 Follow-up Steps: 
 ;
-* code
+
+proc means mean noprint data=Homicide_analytic_file;
+    class Victim Ethnicity;
+    var Crime Solved;
+    output out=Homicide_analytic_file_temp;
+run;
