@@ -27,7 +27,7 @@ deleting row 1-402432 from worksheet "homicide database"
 
 * setup environmental parameters;
 %let inputDatasetURL =
-https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xlsx
+https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xls
 ;
 
 

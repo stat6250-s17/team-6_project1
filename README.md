@@ -1,3 +1,4 @@
 # team-6_project1
 
-Team King's Landing
+Team Nickname: King's Landing
+
