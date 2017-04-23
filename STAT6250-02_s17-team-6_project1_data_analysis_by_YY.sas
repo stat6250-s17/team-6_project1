@@ -48,32 +48,43 @@ It could help the police to strengthen risk prevention,
 and the weapon management and control shall be strengthened.
 
 Methodology: Use PROC SORT extract and sort the weapon from the dataset, 
-and use PROC PRINT to print the first three observations from the dataset.
+and output the results to a temporary dataset. Use PROC PRINT to print 
+the first three observations from the temporary dataset.
 
 Limitations: This methodology does not account for districts with unknown data,
 nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps: More carefully clean the values of the variable
 ;
-proc sort data=Homicide_analytic_file(where=(weapon));
+proc sort 
+    data=Homicide_analytic_file(where=(weapon));
     by descending Percent_weapon;
+    output out=Homicide_analytic_file_temp;
 run;
 
 proc print noobs data=Homicide_analytic_file(obs=3);
     id weapon;
     var Percent_weapon;
+    
 run;
 
 
 *
 Research Question: What the percentage of the perpetrator who is less than 18 years old?
 
-Rationale: The tendency of young aged crimes committed by juveniles has become a hot topic for the media, 
-I would like to see the overall and every decade trend to verify an increase in juvenile delinquency.
+Rationale: The tendency of young aged crimes committed by juveniles has become 
+a hot topic for the media, I would like to see the overall and every decade 
+trend to verify an increase in juvenile delinquency.
 
-Methodology: 
+Methodology: Use PROC SORT extract and sort the Perpetrator Age from the dataset.
+Categorize the variable "Perpetrator Age" into two groups, "under 18" and "over 18".
+Use a data procedure to associate the new format with the variable "Perpetrator Age",
+and store into a new dataset. Compute five-number summaries by the reformatted 
+variable consisting of two groups.
 
-Limitations: 
+Limitations:
+
+Possible follow-up steps:
 
 Follow-up Steps: 
 ;
