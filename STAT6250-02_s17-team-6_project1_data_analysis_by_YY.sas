@@ -29,15 +29,36 @@ Research Question:  Are perpetrators and victims more likely to be male or femal
 
 Rationale: Nowadays, it is widely believed that males are more dangerous than females, 
 I would like to see the dataset shows percentages of male perpetrator.
-Also, is there any trend or the gender relationship between the perpetrators and the victims.
+Also, is there any trend or the gender relationship between the perpetrators and 
+the victims.
 
-Methodology: 
+Methodology: We can first sort the male and female, the to see the percentage rate 
+of each categories.
 
-Limitations:
+Limitations: This problem is straight forward, the only draw-back would be if the 
+male/female category isn't given so we can't sort them propertly.
 
-Possible Follow-up Steps: 
+Possible Follow-up Steps: We only need to mae sure that both percentage column 
+and male/female columns are given.
 ;
-* code
+
+proc format;
+	value $victims_bins
+	"Male"="Male"
+	"Female"="Female"
+	;	
+run;
+
+data new_victims_data;
+	set Homicide_analytic_file;
+	format victims victims_bins.;
+run;
+
+proc means min q1 median q3 max data=new_victims_data;
+	class victoms;
+	var percentage_rate;
+run;
+
 
 
 *
@@ -56,6 +77,8 @@ nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps: More carefully clean the values of the variable
 ;
+*
+
 proc sort 
     data=Homicide_analytic_file(where=(weapon));
     by descending Percent_weapon;
@@ -82,12 +105,22 @@ Use a data procedure to associate the new format with the variable "Perpetrator 
 and store into a new dataset. Compute five-number summaries by the reformatted 
 variable consisting of two groups.
 
-Limitations:
+Limitations: The assumtions for this model has potential error because of the size of the data source being too large, for the subset(our version of the excel), This shouldn't be a problem
 
-Possible follow-up steps:
+Possible follow-up steps: One thing we can do is to either use other model to calculate for a more efficient time complexity, or shrink the data size
 
-Follow-up Steps: 
+Follow-up Steps: We can modify the algorithm to make it faster
 ;
 * code
 
+proc means min q1 median q2 max data= Homicide_analytic_file;
+        var Perpetrator_age;
+run;
+
+proc format;
+        value Perpetrator_Age
+            low-<18 = "Q1 Perpetrator_Age"
+            18-<high = "Q2 Perpetrator_Age"
+            ;
+run;
 
