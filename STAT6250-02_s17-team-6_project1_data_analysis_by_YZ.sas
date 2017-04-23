@@ -5,8 +5,8 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding the homicide rate over states in the United States from 2000-2014.
-Dataset Name: Homicide reports, 2000-2014
+questions regarding homicide incidences in the US from 2000-2014.
+Dataset Name: Homicide_analytic_file created in external file
 STAT6250-02_s17-team-6_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
 See included file for dataset properties
@@ -14,33 +14,94 @@ See included file for dataset properties
 
 * environmental setup;
 
-* set relative file import path to current directory using the code as below:...
+* set relative file import path to current directory (using standard SAS trick
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
 
+* load external file that generates analytic dataset Homicide_analytic_file;
+%include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
-* Research Question: What is the relationship between where the crime take place and the rate of the solved crimes? 
+*
+
+* Research Question: What is the relationship between where the crime take place and the rate of the solved crimes?
+If so, does it perform as positive or negative relationship?
+
 Rational: It helps to determine whether the geographic environment will have positive/negative impact on the case solving.
-Methodology:
-Possible follow-up steps: Any improvements in the code? Adjustment? Or the current methods don't apply to the dataset.
+
+Methodology: Use PROC Freq to compute sum the number of solved crimes for each year corresponds to the cities that
+the crime took place. Run a scatterplot and check assumption and output the results to a temportatry dataset. 
+
+Possible follow-up steps: Clean out the outliers in the data and ignore the "noises". Apply the abline to the output.
+
 ;
 
-* code
+proc freq data=Homicide_analytic_file;
+    tables Crime Solved;
+    var City;
+    output out=Homicide_analytic_file_temp;
+run;
+
+proc univariate data=Homicide_analytic_file; 
+		var Crime Solved City;
+		run;
 
 
 *
-Research Question: Does the outcome shows that the there are more white victims than the other race came across murder in some specific states? 
+Research Question: Does the outcome shows that the there are more white victims than 
+the other race came across murder in some specific states? 
+
 Rational: It helps us to determine the relationship between race and state.
-Methodology:
-Possible follow-up steps: Any improvements in the code? Do we need to clean out any outliers? Is there any other SAS functions could also be applied to this data?
 
+Methodology: Compute five-number summaries 
+
+Limitation: This methodology does not account for schools with missing data.
+
+Possible follow-up steps: More carefully clean the values of the variable
+Homicide_analytic_file so that the statistics computed do not include any
+possible illegal values and can better handle missing data.
 ;
-*code
+
+
+proc means min q1 median q3 max data=Homicide_analytic_file;
+    class Incident;
+    var Victim Race;
+run;
+
 
 *
-Research Question: What other factors might influence the outcome? 
-Rational: Besides the factors listed as variables, we need to study the disturbing factors that might cause bias.
-Methodology: 
-Possible follow-up steps: Any improvements in the code? Check normality? Check other assumption? Is there any shortage of this method?
+Research Question: What are the top thirty states with the highest mean
+values of perpetratoes?
+Rationale: This should help identify the relationship between the states (location) and the perpetratoes.
+
+Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 1980- 2014
+for State_Name, and output the results to a temporary dataset. Use PROC
+SORT extract and sort just the means the temporary dateset, and use PROC PRINT
+to print just the first thirty observations from the temporary dataset.
+
+Limitations: This methodology does not account for states with missing data.
+
+Possible Follow-up Steps: More carefully clean the values of the variable
+of locations so that the means computed do not include any possible
+illegal values, and better handle missing data.
 ;
 
-*code
+proc means mean noprint data=Homicide_analytic_file;
+    class States_Name;
+    var Incidence;
+    output out=Homicide_analytic_file_temp;
+run;
+
+    var Homicide_analytic_file_temp;
+    output out=Homicide_analytic_file_temp;
+run;
+
+proc sort data=FRPM1516_analytic_file_temp(where=(_STAT_="MEAN"));
+    by descending Incidence;
+run;
+
+proc print noobs data=Homicide_analytic_file_temp(obs=30);
+    id State_Name;
+    var Incidence;
+run;
+
+
 Reason for Choice: The topic appeals to me because it includes the homicide data set posted by FBI from 1980-2014. I can study the multi-relationship between the race, the perpetrator, sex, whether the case is solved or not, etc. It will be exciting when I run out my own data and compare the output with the others' and learn from them.
