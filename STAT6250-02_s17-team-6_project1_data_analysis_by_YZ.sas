@@ -6,6 +6,7 @@
 *
 This file uses the following analytic dataset to address several research
 questions regarding homicide incidences in the US from 2000-2014.
+
 Dataset Name: Homicide_analytic_file created in external file
 STAT6250-02_s17-team-6_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
@@ -30,7 +31,14 @@ Rational: It helps to determine whether the geographic environment will have pos
 Methodology: Use PROC Freq to compute sum the number of solved crimes for each year corresponds to the cities that
 the crime took place. Run a scatterplot and check assumption and output the results to a temportatry dataset. 
 
-Possible follow-up steps: Clean out the outliers in the data and ignore the "noises". Apply the abline to the output.
+Limitation: There might exist missing data and other environmental factors that will cause bias, such as the migration rate of 
+the resident.
+
+Possible follow-up steps: More carefully clean the values of the variable
+Homicide_analytic_file so that the statistics computed do not include any
+possible illegal values and can better handle missing data or clean out the 
+outliers in the data and ignore the "noises" in some situation. Make adjustment
+to the data set and apply the abline to the output.
 
 ;
 
@@ -104,4 +112,3 @@ proc print noobs data=Homicide_analytic_file_temp(obs=30);
 run;
 
 
-Reason for Choice: The topic appeals to me because it includes the homicide data set posted by FBI from 1980-2014. I can study the multi-relationship between the race, the perpetrator, sex, whether the case is solved or not, etc. It will be exciting when I run out my own data and compare the output with the others' and learn from them.
