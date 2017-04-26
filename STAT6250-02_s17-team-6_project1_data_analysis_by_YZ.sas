@@ -26,19 +26,23 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 *******************************************************************************;
 
-* Research Question: What is the relationship between where the crime take place and the rate of the solved crimes?
+* Research Question: What is the relationship between where the crime take 
+place and the rate of the solved crimes?
 
 
-Rational: It helps to determine whether the geographic environment will have positive/negative impact on the case solving.
+Rational: It helps to determine whether the geographic environment will
+have positive/negative impact on the case solving.
 
-Methodology: Use PROC Freq to compute sum the number of solved crimes for each year corresponds to the cities that
-the crime took place. Run a scatterplot and check assumption.
+Methodology: Use PROC Freq to compute sum the number of solved crimes for
+each year corresponds to the cities that the crime took place.
+Run a scatterplot and check assumption.
 
-Limitation: There might exist missing data and other environmental factors that will cause bias, such as the migration rate of 
-the resident.
+Limitation: There might exist missing data and other environmental factors
+that will cause bias, such as the migration rate of the resident.
 
-Possible follow-up steps: Clean out the outliers in the data and ignore the "noises" in some situation. Make adjustment
-to the data set and apply the abline to the output.
+Possible follow-up steps: Clean out the outliers in the data and ignore 
+the "noises" in some situation. Make adjustment to the data set and apply 
+the abline to the output.
 
 
 *******************************************************************************;
@@ -58,8 +62,8 @@ proc univariate data=Homicide_analytic_file;
 /*
 
 *******************************************************************************;
-Research Question: Does the outcome shows that the there are more white victims than 
-the other race came across murder in some specific states? 
+Research Question: Does the outcome shows that the there are more white victims 
+than the other race came across murder in some specific states? 
 
 Rational: It helps us to determine the relationship between race and state.
 
@@ -67,8 +71,9 @@ Methodology: Compute five-number summaries
 
 Limitation: This methodology does not account for schools with missing data.
 
-Possible follow-up steps: More carefully clean the values of the variable Homicide_analytic_file 
-so that the statistics computed do not include any possible illegal values and can better handle missing data
+Possible follow-up steps: More carefully clean the values of the variable 
+Homicide_analytic_file so that the statistics computed do not include any 
+possible illegal values and can better handle missing data.
 
 *******************************************************************************;
 */
@@ -82,17 +87,22 @@ run;
 /*
 *******************************************************************************;
 
-Research Question: What are the top thirty states with the highest mean values of perpetratoes?
+Research Question: What are the top thirty states with the highest mean values 
+of perpetratoes?
 
-Rationale: This should help identify the relationship between the states (location) and the perpetratoes.
+Rationale: This should help identify the relationship between the states 
+(location) and the perpetratoes.
 
-Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 1980- 2014for State_Name to 
-output the results to a temporary dataset. Use PROC SORT extract and sort just the means the temporary dateset, 
-and use PROC PRINT to print just the first thirty observations from the temporary dataset.
+Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 
+1980- 2014for State_Name to output the results to a temporary dataset. 
+Use PROC SORT extract and sort just the means the temporary dateset, and use
+PROC PRINT to print just the first thirty observations from the temporary 
+dataset.
 
 Limitations: This methodology does not account for states with missing data.
 
-Possible Follow-up Steps: More carefully clean the values of the variable of locations.
+Possible Follow-up Steps: More carefully clean the values of the variable of 
+locations.
 
 *******************************************************************************;
 */
