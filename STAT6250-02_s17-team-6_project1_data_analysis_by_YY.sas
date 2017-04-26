@@ -27,7 +27,6 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 *******************************************************************************;
 
-*
 Research Question:  Are perpetrators and victims more likely to be male or 
 female?  
 
@@ -69,6 +68,7 @@ run;
 /*
 
 *******************************************************************************;
+
 Research Question: What are the top three weapons used? 
 
 Rationale: This should help identify the most commonly used weapon.
@@ -86,7 +86,6 @@ Possible Follow-up Steps: More carefully clean the values of the variable
 
 *******************************************************************************;
 */
-
 
 proc sort 
     data=Homicide_analytic_file(where=(weapon));
@@ -123,7 +122,9 @@ size of the data source being too large, for the subset
 Possible follow-up steps: One thing we can do is to either use other model to 
 calculate for a more efficient time complexity, or shrink the data size.
 We can modify the algorithm to make it faster
-;
+
+*******************************************************************************;
+*/
 
 proc means min q1 median q2 max data= Homicide_analytic_file;
     var Perpetrator_age;
