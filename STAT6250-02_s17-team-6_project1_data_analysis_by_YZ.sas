@@ -6,9 +6,11 @@
 *
 This file uses the following analytic dataset to address several research
 questions regarding homicide incidences in the US from 2000-2014.
+
 Dataset Name: Homicide_analytic_file created in external file
 STAT6250-02_s17-team-6_project1_data_preparation.sas, which is assumed to be
 in the same directory as this file
+
 See included file for dataset properties
 ;
 
@@ -21,15 +23,24 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 %include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
 /*
+
 *******************************************************************************;
+
 * Research Question: What is the relationship between where the crime take place and the rate of the solved crimes?
+
+
 Rational: It helps to determine whether the geographic environment will have positive/negative impact on the case solving.
+
 Methodology: Use PROC Freq to compute sum the number of solved crimes for each year corresponds to the cities that
 the crime took place. Run a scatterplot and check assumption.
+
 Limitation: There might exist missing data and other environmental factors that will cause bias, such as the migration rate of 
 the resident.
+
 Possible follow-up steps: Clean out the outliers in the data and ignore the "noises" in some situation. Make adjustment
 to the data set and apply the abline to the output.
+
+
 *******************************************************************************;
 */
 
@@ -45,14 +56,20 @@ proc univariate data=Homicide_analytic_file;
 
 
 /*
+
 *******************************************************************************;
 Research Question: Does the outcome shows that the there are more white victims than 
 the other race came across murder in some specific states? 
+
 Rational: It helps us to determine the relationship between race and state.
+
 Methodology: Compute five-number summaries 
+
 Limitation: This methodology does not account for schools with missing data.
+
 Possible follow-up steps: More carefully clean the values of the variable Homicide_analytic_file 
-so that the statistics computed do not include any possible illegal values and can better handle missing data.
+so that the statistics computed do not include any possible illegal values and can better handle missing data
+
 *******************************************************************************;
 */
 
@@ -64,13 +81,19 @@ run;
 
 /*
 *******************************************************************************;
+
 Research Question: What are the top thirty states with the highest mean values of perpetratoes?
+
 Rationale: This should help identify the relationship between the states (location) and the perpetratoes.
+
 Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 1980- 2014for State_Name to 
 output the results to a temporary dataset. Use PROC SORT extract and sort just the means the temporary dateset, 
 and use PROC PRINT to print just the first thirty observations from the temporary dataset.
+
 Limitations: This methodology does not account for states with missing data.
+
 Possible Follow-up Steps: More carefully clean the values of the variable of locations.
+
 *******************************************************************************;
 */
 proc means mean noprint data=Homicide_analytic_file;
@@ -91,3 +114,4 @@ proc print noobs data=Homicide_analytic_file_temp(obs=30);
     id State_Name;
     var Incidence;
 run;
+
