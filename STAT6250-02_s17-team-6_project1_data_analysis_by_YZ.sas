@@ -20,19 +20,18 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * load external file that generates analytic dataset Homicide_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
-*
-
+/*
+*******************************************************************************;
 * Research Question: What is the relationship between where the crime take place and the rate of the solved crimes?
-If so, does it perform as positive or negative relationship?
-
 Rational: It helps to determine whether the geographic environment will have positive/negative impact on the case solving.
-
 Methodology: Use PROC Freq to compute sum the number of solved crimes for each year corresponds to the cities that
-the crime took place. Run a scatterplot and check assumption and output the results to a temportatry dataset. 
-
-Possible follow-up steps: Clean out the outliers in the data and ignore the "noises". Apply the abline to the output.
-
-;
+the crime took place. Run a scatterplot and check assumption.
+Limitation: There might exist missing data and other environmental factors that will cause bias, such as the migration rate of 
+the resident.
+Possible follow-up steps: Clean out the outliers in the data and ignore the "noises" in some situation. Make adjustment
+to the data set and apply the abline to the output.
+*******************************************************************************;
+*/
 
 proc freq data=Homicide_analytic_file;
     tables Crime Solved;
@@ -45,20 +44,17 @@ proc univariate data=Homicide_analytic_file;
 		run;
 
 
-*
+/*
+*******************************************************************************;
 Research Question: Does the outcome shows that the there are more white victims than 
 the other race came across murder in some specific states? 
-
 Rational: It helps us to determine the relationship between race and state.
-
 Methodology: Compute five-number summaries 
-
 Limitation: This methodology does not account for schools with missing data.
-
-Possible follow-up steps: More carefully clean the values of the variable
-Homicide_analytic_file so that the statistics computed do not include any
-possible illegal values and can better handle missing data.
-;
+Possible follow-up steps: More carefully clean the values of the variable Homicide_analytic_file 
+so that the statistics computed do not include any possible illegal values and can better handle missing data.
+*******************************************************************************;
+*/
 
 
 proc means min q1 median q3 max data=Homicide_analytic_file;
@@ -66,24 +62,17 @@ proc means min q1 median q3 max data=Homicide_analytic_file;
     var Victim Race;
 run;
 
-
-*
-Research Question: What are the top thirty states with the highest mean
-values of perpetratoes?
+/*
+*******************************************************************************;
+Research Question: What are the top thirty states with the highest mean values of perpetratoes?
 Rationale: This should help identify the relationship between the states (location) and the perpetratoes.
-
-Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 1980- 2014
-for State_Name, and output the results to a temporary dataset. Use PROC
-SORT extract and sort just the means the temporary dateset, and use PROC PRINT
-to print just the first thirty observations from the temporary dataset.
-
+Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 1980- 2014for State_Name to 
+output the results to a temporary dataset. Use PROC SORT extract and sort just the means the temporary dateset, 
+and use PROC PRINT to print just the first thirty observations from the temporary dataset.
 Limitations: This methodology does not account for states with missing data.
-
-Possible Follow-up Steps: More carefully clean the values of the variable
-of locations so that the means computed do not include any possible
-illegal values, and better handle missing data.
-;
-
+Possible Follow-up Steps: More carefully clean the values of the variable of locations.
+*******************************************************************************;
+*/
 proc means mean noprint data=Homicide_analytic_file;
     class States_Name;
     var Incidence;
@@ -102,6 +91,3 @@ proc print noobs data=Homicide_analytic_file_temp(obs=30);
     id State_Name;
     var Incidence;
 run;
-
-
-Reason for Choice: The topic appeals to me because it includes the homicide data set posted by FBI from 1980-2014. I can study the multi-relationship between the race, the perpetrator, sex, whether the case is solved or not, etc. It will be exciting when I run out my own data and compare the output with the others' and learn from them.
