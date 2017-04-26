@@ -23,7 +23,9 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * load external file that generates analytic dataset Homicide_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
+/*
 
+*******************************************************************************;
 
 *
 Research Question:  Are perpetrators and victims more likely to be male or 
@@ -42,7 +44,9 @@ the male/female category isn't given so we can't sort them propertly.
  
 Possible Follow-up Steps: We only need to mae sure that both percentage 
 column and male/female columns are given.
-;
+
+*******************************************************************************;
+*/
 
 proc format;
     value $victims_bins
@@ -62,8 +66,9 @@ proc means min q1 median q3 max data=new_victims_data;
 run;
 
 
+/*
 
-*
+*******************************************************************************;
 Research Question: What are the top three weapons used? 
 
 Rationale: This should help identify the most commonly used weapon.
@@ -78,7 +83,10 @@ Limitations: This methodology does not account for districts with unknown
 data, nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps: More carefully clean the values of the variable
-;
+
+*******************************************************************************;
+*/
+
 
 proc sort 
     data=Homicide_analytic_file(where=(weapon));
@@ -92,9 +100,9 @@ proc print noobs data=Homicide_analytic_file(obs=3);
     
 run;
 
+/*
+*******************************************************************************;
 
-
-*
 Research Question: What the percentage of the perpetrator who is less than 18 
 years old?
 
