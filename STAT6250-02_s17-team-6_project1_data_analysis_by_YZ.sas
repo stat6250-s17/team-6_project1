@@ -28,6 +28,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 * Research Question: What is the relationship between where the crime take place and the rate of the solved crimes?
 
+
 Rational: It helps to determine whether the geographic environment will have positive/negative impact on the case solving.
 
 Methodology: Use PROC Freq to compute sum the number of solved crimes for each year corresponds to the cities that
@@ -38,6 +39,7 @@ the resident.
 
 Possible follow-up steps: Clean out the outliers in the data and ignore the "noises" in some situation. Make adjustment
 to the data set and apply the abline to the output.
+
 
 *******************************************************************************;
 */
@@ -66,7 +68,7 @@ Methodology: Compute five-number summaries
 Limitation: This methodology does not account for schools with missing data.
 
 Possible follow-up steps: More carefully clean the values of the variable Homicide_analytic_file 
-so that the statistics computed do not include any possible illegal values and can better handle missing data.
+so that the statistics computed do not include any possible illegal values and can better handle missing data
 
 *******************************************************************************;
 */
@@ -112,5 +114,4 @@ proc print noobs data=Homicide_analytic_file_temp(obs=30);
     id State_Name;
     var Incidence;
 run;
-
 
