@@ -48,8 +48,7 @@ filename tempfile clear;
 
 
 * check raw Homicide dataset for duplicates with respect to its composite key;
-proc sort nodupkey data=homicide_raw
-    dupout=homicide_raw_dups out=_null_;
+proc sort nodupkey data=homicide_raw dupout=homicide_raw_dups out=_null_;
     by Record ID;
 run;
 
@@ -100,6 +99,6 @@ data homicide_analytic_file;
         Victim Count
         Perpetrator Count
     ;
-    set homicide_raw;s
+    set homicide_raw;
 run;
 
