@@ -47,13 +47,6 @@ column and male/female columns are given.
 *******************************************************************************;
 */
 
-proc format;
-    value $victims_bins
-    "Male"="Male"
-    "Female"="Female"
-    ;	
-run;
-
 data new_victims_data;
     set Homicide_analytic_file;
     format victims victims_bins.;
@@ -130,11 +123,6 @@ proc means min q1 median q2 max data= Homicide_analytic_file;
     var Perpetrator_age;
 run;
 
-proc format;
-    value Perpetrator_Age;
-        low-<18 = "Q1 Perpetrator_Age" 
-        18-<high = "Q2 Perpetrator_Age"
-        ;
-run;
+
 
 
