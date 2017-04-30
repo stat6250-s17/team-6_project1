@@ -24,13 +24,12 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * load external file that generates analytic dataset Homicide_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
-* 
-Research Question: Since 1980, has national homicide rate increased or 
-decreased overall?
 
-Rationale: Nowadays there’s narrative in the media that the country is 
-more dangerous than before - I would like to see what has been the trend
-from 2000-2014.
+title1
+'Research Quesiton: What is the trend for the "number of national homicide" since 2000?'
+
+title2:
+'Rationale: This should validate or refute the idea that we are living in a more dangergous society than previous decades.'
 
 limitations: This methodology does not calculate the percentage change
 from one year over the previous which would give us a look at the 
@@ -43,14 +42,12 @@ the average percent change.
 ;
 
 
-*
-Research Question: Are males perpetrator more like to use guns than female
-perpetrators?
 
-Rationale: The nation is divided regarding the narrative of guns - I would 
-like to see if there is a particular link between use of guns in homicides and 
-the sex of the victim to see if they are certain type of homicides that are 
-more likely to involve guns.
+title1 
+'Research Question: How many homicides involving males vs. females uses guns as the weapon?'
+
+title2
+'Rationale: This should give insights to if there is a particular link between use of guns in homicides and the sex of the victim.'
 
 Methodolody: Use proc print to create a temp data file with homicide involving 
 handguns
@@ -71,13 +68,11 @@ run;
 output out=Homicide_mean_temp;
 run;
 
-*
-Research Question: What is the relationship between rate of crime solve 
-and the race/ethnicity of the victim?
+title1
+'Research Question: How many crimes are solved among the different groups of victims by race/ethnicity?'
 
-Rationale: The common narrative is regarding the high percentage of minorities 
-in prison systems - I would like to know if the rate of crimes solve for 
-minorities are lower or highest than that of white victims
+title2
+'Rationale: This will show  if the rate of crimes solve for minorities are lower or highest than that of white victims.'
 
 Methodology: Use Proc Print to print freqency of crime solved.
 
