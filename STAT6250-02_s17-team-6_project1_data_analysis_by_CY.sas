@@ -24,18 +24,29 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 * load external file that generates analytic dataset Homicide_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
-* 
-Research Question: Since 1980, has national homicide rate increased or 
-decreased overall?
 
-Rationale: Nowadays there’s narrative in the media that the country is 
-more dangerous than before - I would like to see what has been the trend
-from 2000-2014.
 
-Methodology: Use PROC Mean to compute sum the number of Incidence
-for each Year, and output the results to a temporary dataset.
-Then use PROC meanto calculate the average of incidence from 2000-2014.
+title1
+'Research Quesiton: What is the trend for the "number of national homicide" since 2000?'
+;
 
+title2
+'Rationale: This should validate or refute the idea that we are living in a more dangergous society than previous decades.'
+;
+
+footnote1
+'The output shows that the number of homicide incidence varies year by year. Since 2000, the number of homicides has gone up and gone down.' 
+;
+
+footnote2
+'For the first half of 2000s, there was an increase of homicides but for the latter half, starting with 2007, there was a decline in homicides.'
+;
+
+footnote3
+'There were a couple of standout years which saw a significant increase from the previous year. 2001, 2006, and 2010 are abnormally high years in terms of homicide counts.'
+;
+
+*
 limitations: This methodology does not calculate the percentage change
 from one year over the previous which would give us a look at the 
 the trend. We should take the mean of the yearly percentage change 
@@ -46,28 +57,44 @@ change from one year over the previous from 2000-2014. Then calculate
 the average percent change.
 ;
 
-proc means data=Homicide_analytic_file;
-    class Year;
-    var Incidence;
-    output out=Homicide_temp;
+proc print 
+        noobs 
+        data=Homicide_analytic_file
+    ;
+    id 
+        Year
+    ;
+    var 
+        Incidence
+    ;
 run;
+title;
+footnote;
 
-proc sort data=Homicide_temp;
-    by ascending Year;
-    run;
+
+title1 
+'Research Question: How many homicides involving males vs. females uses guns as the weapon?'
+;
+
+title2
+'Rationale: This should give insights to if there is a particular link between use of guns in homicides and the sex of the victim.'
+;
+
+footnote1
+'The number of incidences involving a male victim and a gun is about 7x greater than number of incidences involving a female victim and a gun'
+;
+
+footnote2
+'The stats is very eye-opening. A follow-up analysis would be to see if the perpetrator is more likely to be male or female when the weapon is a gun. I would hypothesis that it is likely male.'
+;
+
+footnote3
+'Another follow-up question is what weapon is more prominent when it involves the female sex.'
+;
 
 *
-Research Question: Are males perpetrator more like to use guns than female
-perpetrators?
-
-Rationale: The nation is divided regarding the narrative of guns - I would 
-like to see if there is a particular link between use of guns in homicides and 
-the sex of the victim to see if they are certain type of homicides that are 
-more likely to involve guns.
-
 Methodolody: Use proc print to create a temp data file with homicide involving 
-handguns and use Proc means to caculate the average incidence where the victim
-is a male vs. female among homicides involving handguns.
+handguns
 
 Limitations: This only takes into consideration handguns. However, we also
 have rifles and shotguns which could be classify in the same bucket. 
@@ -77,31 +104,37 @@ shotguns are considered under firearms and then look at the gender
 differences between the victim's sex (and also the perpetrator's sex).
 ;
 
-proc print data=Homicide_analytic_file;
-    where Weapon="Handgun";
-    output out=Homicide_temp;
+proc print 
+        data=Homicide_analytic_file
+    ;
+        where Weapon="Handgun"
+    ;
+        output out=Homicide_temp
+    ;
 run;
+title;
+footnote;
 
-proc means data=Homicide_temp;
-    class Victim_Sex;
-    var Incidence;
-    output out=Homicide_mean_temp;
-run;
 
-output out=Homicide_mean_temp;
-run;
+
+title1
+'Research Question: How many crimes are solved among the different groups of victims by race/ethnicity?'
+;
+
+title2
+'Rationale: This will show  if the rate of crimes solve for minorities are lower or highest than that of white victims.'
+;
+
+footnote1
+'The output shows that about 80% of homicides involving victims that are white are solved while only 63% of homicides involving victims that are black are solved.'
+;
+
+footnote2
+'The results shows the stark reality of racial issues in the country. A follow-up analysis would be to understand why this is. Is there any information in the data to suggest any differences other than race.'
+;
 
 *
-Research Question: What is the relationship between rate of crime solve 
-and the race/ethnicity of the victim?
-
-Rationale: The common narrative is regarding the high percentage of minorities 
-in prison systems - I would like to know if the rate of crimes solve for 
-minorities are lower or highest than that of white victims
-
-Methodology: Tabulate the number of incidences where the crime is solved
-and the victim's ethncity. Use Proc Mean to calculate the number of incidences
-solved by ethnicity. Use Proc sort to sort from highest to lowest by the mean.
+Methodology: Use Proc Print to print freqency of crime solved.
 
 Limitations: This only looks at crimes that were solved. It is also 
 interesting to be able to compare crimes that were solved vs. crimes that
@@ -113,18 +146,13 @@ ethnicity of the victim as the row with incidence calculated for
 each.
 ;
 
-proc print data=Homicide_analytic_file;
-    where Crime_Solved="Yes";
-    output out=Homicide_solved_temp;
+proc print 
+        data=Homicide_analytic_file
+    ;
+        where Crime_Solved="Yes"
+    ;
+        output out=Homicide_solved_temp
+    ;
 run;
-
-proc means data=Homicide_solved_temp;
-    class Victim_Ethnicity;
-    var Incidience;
-    output out=Homicide_analytic_file_temp;
-run;
-
-proc sort data=Homicide_analytic_file_temp(where=(_STAT_="MEAN"));
-    by  descending Incidence;
-run;
-
+title;
+footnote;
