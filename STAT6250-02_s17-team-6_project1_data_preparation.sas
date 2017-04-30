@@ -30,16 +30,14 @@ deleting row 1-402432 from worksheet "homicide database"
 
 proc format;
     value $victims_bins
-    "Male"="Male"
-    "Female"="Female"
+        "Male"="Male"
+        "Female"="Female"
     ;	
-run;
 
-proc format;
     value Perpetrator_Age;
         low-<18 = "Q1 Perpetrator_Age" 
         18-<high = "Q2 Perpetrator_Age"
-        ;
+    ;
 run;
 
 
