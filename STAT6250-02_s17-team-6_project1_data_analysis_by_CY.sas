@@ -27,10 +27,12 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 title1
 'Research Quesiton: What is the trend for the "number of national homicide" since 2000?'
+;
 
 title2:
 'Rationale: This should validate or refute the idea that we are living in a more dangergous society than previous decades.'
-
+;
+*
 limitations: This methodology does not calculate the percentage change
 from one year over the previous which would give us a look at the 
 the trend. We should take the mean of the yearly percentage change 
@@ -45,10 +47,12 @@ the average percent change.
 
 title1 
 'Research Question: How many homicides involving males vs. females uses guns as the weapon?'
+;
 
 title2
 'Rationale: This should give insights to if there is a particular link between use of guns in homicides and the sex of the victim.'
-
+;
+*
 Methodolody: Use proc print to create a temp data file with homicide involving 
 handguns
 
@@ -70,10 +74,12 @@ run;
 
 title1
 'Research Question: How many crimes are solved among the different groups of victims by race/ethnicity?'
+;
 
 title2
 'Rationale: This will show  if the rate of crimes solve for minorities are lower or highest than that of white victims.'
-
+;
+*
 Methodology: Use Proc Print to print freqency of crime solved.
 
 Limitations: This only looks at crimes that were solved. It is also 
