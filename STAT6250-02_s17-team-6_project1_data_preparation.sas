@@ -118,3 +118,49 @@ data homicide_analytic_file;
     set homicide_raw;
 run;
 
+* 
+Methodology: Use PROC Mean to compute sum the number of Incidence
+for each Year, and output the results to a temporary dataset.
+Then use PROC meanto calculate the average of incidence from 2000-2014.
+;
+
+
+proc means data=Homicide_analytic_file;
+    class Year;
+    var Incidence;
+    output out=Homicide_temp;
+run;
+
+proc sort data=Homicide_temp;
+    by ascending Year;
+    run;
+    
+* 
+Methodology: Use Proc means to caculate the average incidence where the victim
+is a male vs. female among homicides involving handguns.
+;
+
+proc means data=Homicide_temp;
+    class Victim_Sex;
+    var Incidence;
+    output out=Homicide_mean_temp;
+run;
+
+*
+Methodology: Tabulate the number of incidences where the crime is solved
+and the victim's ethncity. Use Proc Mean to calculate the number of incidences
+solved by ethnicity. Use Proc sort to sort from highest to lowest by the mean.
+;
+
+proc means data=Homicide_solved_temp;
+    class Victim_Ethnicity;
+    var Incidience;
+    output out=Homicide_analytic_file_temp;
+run;
+
+proc sort data=Homicide_analytic_file_temp(where=(_STAT_="MEAN"));
+    by  descending Incidence;
+run;
+
+
+
