@@ -25,6 +25,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 %include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
 
 
+
 title1
 'Research Quesiton: What is the trend for the "number of national homicide" since 2000?'
 ;
@@ -45,7 +46,6 @@ footnote3
 'There were a couple of standout years which saw a significant increase from the previous year. 2001, 2006, and 2010 are abnormally high years in terms of homicide counts.'
 ;
 
-
 *
 limitations: This methodology does not calculate the percentage change
 from one year over the previous which would give us a look at the 
@@ -57,6 +57,13 @@ change from one year over the previous from 2000-2014. Then calculate
 the average percent change.
 ;
 
+proc print noobs data=Homicide_analytic_file;
+    id Year;
+    var Incidence;
+run;
+
+title;
+footnote;
 
 
 title1 
@@ -79,7 +86,6 @@ footnote3
 'Another follow-up question is what weapon is more prominent when it involves the female sex.'
 ;
 
-
 *
 Methodolody: Use proc print to create a temp data file with homicide involving 
 handguns
@@ -99,6 +105,11 @@ run;
 
 output out=Homicide_mean_temp;
 run;
+
+title;
+footnote;
+
+
 
 title1
 'Research Question: How many crimes are solved among the different groups of victims by race/ethnicity?'
@@ -134,4 +145,5 @@ proc print data=Homicide_analytic_file;
     output out=Homicide_solved_temp;
 run;
 
-
+title;
+footnote;
