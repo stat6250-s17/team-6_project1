@@ -34,7 +34,7 @@ proc format;
         "Female"="Female"
     ;	
 
-    value Perpetrator_Age;
+    value Perpetrator_Age
         low-<18 = "Q1 Perpetrator_Age" 
         18-<high = "Q2 Perpetrator_Age"
     ;
@@ -46,27 +46,55 @@ run;
 https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xls
 ;
 
-
-* load raw Homcidie dataset over the wire;
-filename tempfile TEMP;
-proc http
-    method="get"
-    url="&inputDatasetURL."
-    out=tempfile
-    ;
-run;
-proc import
-    file=tempfile
-    out=homicide_raw
-    dbms=xls;
-run;
-filename tempfile clear;
+* load raw FRPM dataset over the wire;
+%macro loadDataIfNotAlreadyAvailable(dsn,url,filetype);
+    %put &=dsn;
+    %put &=url;
+    %put &=filetype;
+    %if
+        %sysfunc(exist(&dsn.)) = 0
+    %then
+        %do;
+            %put Loading dataset &dsn. over the wire now...;
+            filename tempfile TEMP;
+            proc http
+                method="get"
+                url="&url."
+                out=tempfile
+                ;
+            run;
+            proc import
+                file=tempfile
+                out=&dsn.
+                dbms=&filetype.;
+            run;
+            filename tempfile clear;
+        %end;
+    %else
+        %do;
+            %put Dataset &dsn. already exists. Please delete and try again.;
+        %end;
+%mend;
+%loadDataIfNotAlreadyAvailable(
+    FRPM1516_raw,
+    &inputDatasetURL.,
+    xls
+)
 
 
 * check raw Homicide dataset for duplicates with respect to its composite key;
-proc sort nodupkey data=homicide_raw dupout=homicide_raw_dups out=_null_;
-    by Record ID;
+proc sort
+        nodupkey
+        data=homicide_raw
+        dupout=homicide_raw_dups
+        out=_null_
+    ;
+    by
+        Record ID
+        Year
+    ;
 run;
+
 
 
 * build analytic dataset from Homicide dataset with the least number of columns and
@@ -125,25 +153,49 @@ Then use PROC meanto calculate the average of incidence from 2000-2014.
 ;
 
 
-proc means data=Homicide_analytic_file;
-    class Year;
-    var Incidence;
-    output out=Homicide_temp;
+proc means 
+        mean
+        noprint
+        data=Homicide_analytic_file
+;
+    class 
+        Year
+    ;
+    var 
+        Incidence
+    ;
+    output 
+        out=Homicide_temp
+    ;
 run;
 
-proc sort data=Homicide_temp;
-    by ascending Year;
-    run;
+proc sort 
+        data=Homicide_temp
+    ;
+    by 
+        ascending Year
+    ;
+run;
     
 * 
 Methodology: Use Proc means to caculate the average incidence where the victim
 is a male vs. female among homicides involving handguns.
 ;
 
-proc means data=Homicide_temp;
-    class Victim_Sex;
-    var Incidence;
-    output out=Homicide_mean_temp;
+proc means 
+        mean
+        noprint 
+        data=Homicide_temp
+    ;
+    class 
+        Victim_Sex
+    ;
+    var 
+        Incidence
+    ;
+    output 
+        out=Homicide_mean_temp
+    ;
 run;
 
 *
@@ -152,14 +204,28 @@ and the victim's ethncity. Use Proc Mean to calculate the number of incidences
 solved by ethnicity. Use Proc sort to sort from highest to lowest by the mean.
 ;
 
-proc means data=Homicide_solved_temp;
-    class Victim_Ethnicity;
-    var Incidience;
-    output out=Homicide_analytic_file_temp;
+proc means 
+        mean
+        noprint
+        data=Homicide_solved_temp
+    ;
+    class 
+        Victim_Ethnicity
+    ;
+    var 
+        Incidience
+    ;
+    output 
+        out=Homicide_analytic_file_temp
+    ;
 run;
 
-proc sort data=Homicide_analytic_file_temp(where=(_STAT_="MEAN"));
-    by  descending Incidence;
+proc sort 
+        data=Homicide_analytic_file_temp(where=(_STAT_="MEAN"))
+    ;
+    by  
+        descending Incidence
+    ;
 run;
 
 
