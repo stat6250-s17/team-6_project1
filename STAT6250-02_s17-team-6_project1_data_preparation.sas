@@ -5,7 +5,7 @@
 
 * 
 This file prepares the dataset described below for analysis.
-[Dataset Name] Homicide Reports, 2000-2014 (Edited)
+[Dataset Name] Homicide Reports, 2000-2014
 
 [Experimental Units] Each agency
 
