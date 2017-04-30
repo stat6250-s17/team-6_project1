@@ -29,9 +29,23 @@ title1
 'Research Quesiton: What is the trend for the "number of national homicide" since 2000?'
 ;
 
-title2:
+title2
 'Rationale: This should validate or refute the idea that we are living in a more dangergous society than previous decades.'
 ;
+
+footnote1
+'The output shows that the number of homicide incidence varies year by year. Since 2000, the number of homicides has gone up and gone down.' 
+;
+
+footnote2
+'For the first half of 2000s, there was an increase of homicides but for the latter half, starting with 2007, there was a decline in homicides.'
+;
+
+footnote3
+'There were a couple of standout years which saw a significant increase from the previous year. 2001, 2006, and 2010 are abnormally high years in terms of homicide counts.'
+;
+
+
 *
 limitations: This methodology does not calculate the percentage change
 from one year over the previous which would give us a look at the 
@@ -52,6 +66,20 @@ title1
 title2
 'Rationale: This should give insights to if there is a particular link between use of guns in homicides and the sex of the victim.'
 ;
+
+footnote1
+'The number of incidences involving a male victim and a gun is about 7x greater than number of incidences involving a female victim and a gun'
+;
+
+footnote2
+'The stats is very eye-opening. A follow-up analysis would be to see if the perpetrator is more likely to be male or female when the weapon is a gun. I would hypothesis that it is likely male.'
+;
+
+footnote3
+'Another follow-up question is what weapon is more prominent when it involves the female sex.'
+;
+
+
 *
 Methodolody: Use proc print to create a temp data file with homicide involving 
 handguns
@@ -79,6 +107,15 @@ title1
 title2
 'Rationale: This will show  if the rate of crimes solve for minorities are lower or highest than that of white victims.'
 ;
+
+footnote1
+'The output shows that about 80% of homicides involving victims that are white are solved while only 63% of homicides involving victims that are black are solved.'
+;
+
+footnote2
+'The results shows the stark reality of racial issues in the country. A follow-up analysis would be to understand why this is. Is there any information in the data to suggest any differences other than race.'
+;
+
 *
 Methodology: Use Proc Print to print freqency of crime solved.
 
