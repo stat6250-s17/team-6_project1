@@ -57,11 +57,17 @@ change from one year over the previous from 2000-2014. Then calculate
 the average percent change.
 ;
 
-proc print noobs data=Homicide_analytic_file;
-    id Year;
-    var Incidence;
+proc print 
+        noobs 
+        data=Homicide_analytic_file
+    ;
+    id 
+        Year
+    ;
+    var 
+        Incidence
+    ;
 run;
-
 title;
 footnote;
 
@@ -98,14 +104,14 @@ shotguns are considered under firearms and then look at the gender
 differences between the victim's sex (and also the perpetrator's sex).
 ;
 
-proc print data=Homicide_analytic_file;
-    where Weapon="Handgun";
-    output out=Homicide_temp;
+proc print 
+        data=Homicide_analytic_file
+    ;
+        where Weapon="Handgun"
+    ;
+        output out=Homicide_temp
+    ;
 run;
-
-output out=Homicide_mean_temp;
-run;
-
 title;
 footnote;
 
@@ -140,10 +146,13 @@ ethnicity of the victim as the row with incidence calculated for
 each.
 ;
 
-proc print data=Homicide_analytic_file;
-    where Crime_Solved="Yes";
-    output out=Homicide_solved_temp;
+proc print 
+        data=Homicide_analytic_file
+    ;
+        where Crime_Solved="Yes"
+    ;
+        output out=Homicide_solved_temp
+    ;
 run;
-
 title;
 footnote;
