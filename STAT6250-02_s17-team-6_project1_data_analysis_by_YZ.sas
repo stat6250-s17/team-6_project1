@@ -108,7 +108,15 @@ title 1
 
 title 2
 'Rationale: This should help identify the relationship between the states (location) and the perpetratoes.'
-
+;
+footnote 1
+'The top thirty states with the highest mean values of perpetratoes are listed in the output.'
+;
+footnote 2
+'More observation should be applied to the missing data.'
+;
+footnote 3
+'We need to clean out the outliers to fit the model better.'
 ;
 
 *
