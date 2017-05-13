@@ -26,7 +26,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 title1
-'Research Question: What's the distribution of Perpetrator age look like for male perpetrators compare to that of female?'
+'Research Question: What is the distribution of Perpetrator age look like for male perpetrators compare to that of female?'
 ;
 
 title2
@@ -97,7 +97,7 @@ title 2
 ;
 
 footnote 1
-'The output shows that there's more white victims than black victims.'
+'The output shows that there is more white victims than black victims.'
 ;
 footnote 2
 'The output shows that the Native American and Alaska Native has the least victims (incidents).'
@@ -126,7 +126,7 @@ footnote;
 
 
 title 1
-'Research Question: What's the spread of the counts of perpetrator corresponding to each state?'
+'Research Question: What is the spread of the counts of perpetrator corresponding to each state?'
 ;
 
 title 2
