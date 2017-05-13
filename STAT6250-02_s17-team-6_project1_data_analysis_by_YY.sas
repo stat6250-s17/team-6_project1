@@ -17,12 +17,12 @@ See included file for dataset properties
 * environmental setup;
 
 * set relative file import path to current directory (using standard SAS trick);
-X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
-　
+X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPATH))-%length(%sysget(SAS_EXECFILENAME))))""";
+
 * load external file that generates analytic dataset Homicide_analytic_file;
 %include '.\STAT6250-02_s17-team-6_project1_data_preparation.sas';
-　
-　
+
+
 title1
 'Research Question: Are victims more likely to be male or female?'
 ;
@@ -47,29 +47,29 @@ the male/female category isn't given so we can't sort them properly.
 Possible Follow-up Steps: We only need to make sure that both age column
 and male/female are given.
 ;
-proc means 
-        min q1 median q3 max
+proc means
+        min q1 median q3 max
         data=homicide_analytic_file
     ;
-    var 
+    var
         victim_age
     ;
 run;
-proc format;
-        value victim_age_bin
+proc format;
+        value victim_age_bin
         low-22="q1 victim age"
         23-29="q2 victim age"
         30-42="q3 victim age"
         43-high="q4 victim age"
     ;
 run;
-proc freq 
+proc freq
         data=homicide_analytic_file
     ;
-    table 
+    table
         victim_sex*victim_age/norow nocol nopercent
     ;
-    format 
+    format
         victim_age victim_age_bin.
     ;
 run;
@@ -103,21 +103,21 @@ data, nor does it attempt to validate data in any way.
 
 Possible Follow-up Steps: More carefully clean the values of the variable.
 ;
-proc freq 
+proc freq
         data=homicide_analytic_file
     ;
-    table 
+    table
         weapon/ noprint out=weapon_frequency
     ;
 run;
 
-proc sort 
+proc sort
         data=weapon_frequency out=weapon_sorted
     ;
-    by 
+    by
         descending count;
 run;
-proc print
+proc print
         noobs
         data=weapon_sorted(obs=3)
     ;
@@ -154,26 +154,26 @@ size of the data source being too large, and too many unknown data.
 Possible follow-up steps: One thing we can do is to get rid of the unknown data.
 We can modify the data to make it more accurate.
 ;
-proc means 
+proc means
         min q1 median q3 max data= Homicide_analytic_file
     ;
     var
         Perpetrator_age
     ;
 run;
-proc format;
-        value Perpetrator_Age_bin
+proc format
+        value Perpetrator_Age_bin
         1-<18 = "under18"
         18-high = "over18"
     ;
 run;
-proc freq 
+proc freq
         data=homicide_analytic_file
     ;
-    table 
+    table
         perpetrator_sex*perpetrator_age/nocol norow
         ;
-    format 
+    format
         perpetrator_age perpetrator_age_bin.
     ;
 run;
