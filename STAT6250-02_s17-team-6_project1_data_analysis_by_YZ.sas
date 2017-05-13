@@ -55,18 +55,32 @@ possible illegal values, and better handle missing data, e.g., by using a
 previous year's data or a rolling average of previous years' data as a proxy.
 ;
 
-proc means
-        min q1 median q3 max
-        data=Homicide_analytic_file_temp
-    ;
-    class
-        Perpetrator_Sex
-    ;
-    var
-        Perpetrator_Age
-    ;
+proc format;
+
+value victim_age_bin
+
+low-18="Teenager perpetrator age"
+
+19-34="Adult perpetrator age"
+
+35-50="Midage perpetrator age"
+
+51-high="Old perpetrator age"
+
+;
+
 run;
+
+proc freq data=homicide_analytic_file;
+
+table perpetrator_sex*perpetrator_age/norow nocol;
+
+format perpetrator_age perpetrator_age_bin.;
+
+run;
+
 title;
+
 footnote;
 
 
@@ -98,6 +112,7 @@ Limitation: This methodology does not account for schools with missing data.
 Possible follow-up steps: More carefully clean the values of the variable 
 Homicide_analytic_file so that the statistics computed do not include any 
 possible illegal values and can better handle missing data.
+;
 
 
 proc means min q1 median q3 max data=Homicide_analytic_file;
@@ -106,6 +121,7 @@ proc means min q1 median q3 max data=Homicide_analytic_file;
 run;
 title;
 footnote;
+
 
 
 
