@@ -27,28 +27,28 @@ deleting row 1-402432 from worksheet "homicide database"
 * environmental setup;
 
 * setup environmental parameters;
-%letÂ inputDatasetURL =
+%let inputDatasetURL =
 https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xls?raw=true
 ;
-filenameÂ tempfileÂ TEMP;
-procÂ http
+filename tempfile TEMP;
+proc http
 method="get"
 url="&inputDatasetURL."
 out=tempfile
 ;
 run;
-procÂ import
+proc import
 file=tempfile
 out=homicide_raw
 dbms=xls;
 run;
-filenameÂ tempfileÂ clear;
-procÂ sortÂ nodupkeyÂ data=homicide_raw
-dupout=homicide_raw_dupsÂ out=_null_;
-byÂ Record_ID;
+filename tempfile clear;
+proc sort nodupkey data=homicide_raw
+dupout=homicide_raw_dups out=_null_;
+by Record_ID;
 run;
-dataÂ homicide_analytic_file;
-setÂ homicide_raw;
+data homicide_analytic_file;
+set homicide_raw;
 retain
 City
 State
