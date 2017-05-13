@@ -26,7 +26,7 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 title1
-'Research Question: What's the distribution of Perpetrator age look like for male perpetrators compare to that of female?'
+'Research Question: What is the distribution of Perpetrator age look like for male perpetrators compare to that of female?'
 ;
 
 title2
@@ -54,7 +54,7 @@ Limitations: This methodology does not account for perpetrator sex with missing 
 Possible Follow-up Steps: More carefully clean the values of the variable
 Perpetrator_age so that the statistics computed do not include any
 possible illegal values, and better handle missing data, e.g., by using a
-previous year data or a rolling average of previous year data as a proxy.
+previous year's data or a rolling average of previous years' data as a proxy.
 ;
 
 proc format;
@@ -97,7 +97,7 @@ title 2
 ;
 
 footnote 1
-'The output shows that there's more white victims than black victims.'
+'The output shows that there is more white victims than black victims.'
 ;
 footnote 2
 'The output shows that the Native American and Alaska Native has the least victims (incidents).'
@@ -116,7 +116,6 @@ Homicide_analytic_file so that the statistics computed do not include any
 possible illegal values and can better handle missing data.
 ;
 
-
 proc means min q1 median q3 max data=Homicide_analytic_file;
     class Victim_Race;
     var Incident;
@@ -127,7 +126,7 @@ footnote;
 
 
 title 1
-'Research Question: What's the spread of the counts of perpetrator corresponding to each state?'
+'Research Question: What is the spread of the counts of perpetrator corresponding to each state?'
 ;
 
 title 2
@@ -153,7 +152,7 @@ Limitations: This methodology does not account for states with missing data.
 
 Possible Follow-up Steps: More carefully clean the values of the variable of 
 locations.
-
+;
 
 proc means
         min q1 median q3 max
