@@ -26,51 +26,30 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 title1
-'Research Quesiton: What is the trend for the "number of national homicide" since 2000?'
+'Research Quesiton: Which state has the most number of homicides from 2000-2004?'
 ;
 
 title2
-'Rationale: This should validate or refute the idea that we are living in a more dangergous society than previous decades.'
+'Rationale: This should reveal which state is has a murder rate problem.'
 ;
 
 footnote1
-'The output shows that the number of homicide incidence varies year by year. Since 2000, the number of homicides has gone up and gone down.' 
-;
-
-footnote2
-'For the first half of 2000s, there was an increase of homicides but for the latter half, starting with 2007, there was a decline in homicides.'
-;
-
-footnote3
-'There were a couple of standout years which saw a significant increase from the previous year. 2001, 2006, and 2010 are abnormally high years in terms of homicide counts.'
+'California has the most number of homicides from 2000-2004.' 
 ;
 
 *
-Methodlogy: Use PROC PRINT to print the number of incidences by year 
+Methodlogy: Use PROC PRINT to print the number of incidences by state 
 from the temporary dataset created in the data-prep file.
 
-limitations: This methodology does not calculate the percentage change
-from one year over the previous which would give us a look at the 
-the trend. We should take the mean of the yearly percentage change 
-to see if the trend has been positive or negative.
+limitations: This methodology does not take into consideration the population size of the state.
 
-Possible Follow-up Steps: Write a code to calculate the percentage
-change from one year over the previous from 2000-2014. Then calculate 
-the average percent change.
+Possible Follow-up Steps: Take into consideration the size of the state's population to .
 ;
 
-proc print 
-        noobs 
-        data=Homicide_analytic_file
+proc freq data=homicide_analytic_file order=freq
     ;
-    id 
-        Year
-    ;
-    var 
-        Incidence
-    ;
-    title
-        'Number of homicides per year'
+    table 
+        State*Crime_Solved
     ;
 run;
 title;
@@ -111,15 +90,11 @@ shotguns are considered under firearms and then look at the gender
 differences between the victim's sex (and also the perpetrator's sex).
 ;
 
-proc print 
-        noobs
-        data=Homicide_analytic_file
+proc freq data=homicide_analytic_file order=freq
     ;
-    id
-        Victim_Sex
+    table 
+       Weapon*Victim_Sex
     ;
-    var
-        Weapon
     title
         'Weapon used in homicide by victim's gender'
     ;
@@ -158,15 +133,11 @@ ethnicity of the victim as the row with incidence calculated for
 each.
 ;
 
-proc print 
-        noobs
-        data=Homicide_analytic_file
+proc freq data=homicide_analytic_file order=freq
     ;
-    id
-        ethnicity group
+    table 
+        Victim_Race*Crime_Solved
     ;
-    var
-        Crimes_Solved
     title
         'Number of homicides solved by ethnicity'
     ;
