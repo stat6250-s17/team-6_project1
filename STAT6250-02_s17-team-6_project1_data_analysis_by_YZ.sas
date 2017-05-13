@@ -116,7 +116,6 @@ Homicide_analytic_file so that the statistics computed do not include any
 possible illegal values and can better handle missing data.
 ;
 
-
 proc means min q1 median q3 max data=Homicide_analytic_file;
     class Victim_Race;
     var Incident;
@@ -153,7 +152,7 @@ Limitations: This methodology does not account for states with missing data.
 
 Possible Follow-up Steps: More carefully clean the values of the variable of 
 locations.
-
+;
 
 proc means
         min q1 median q3 max
