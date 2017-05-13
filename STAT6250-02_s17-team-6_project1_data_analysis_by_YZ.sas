@@ -89,29 +89,27 @@ footnote;
 
 
 title 1
-'Research Question: Does the outcome shows that the there are more white victims than the other race came across murder in some 
-specific states?'
+'Research Question: What is the relationship between victim race and the number of incidents?'
 ;
 
 title 2
-'Rational: It helps us to determine the relationship between race and state and see if there are more white victims in particular 
-states.'
+'Rational: It helps us to learn if it appears more victims in some particular races than the other.'
 ;
 
 footnote 1
-'The output shows that there's more white victims in ... and more black vitims in....'
+'The output shows that there's more white victims than black victims.'
 ;
 footnote 2
-'The correlationship between the two variables are positive.'
+'The output shows that the Native American and Alaska Native has the least victims (incidents).'
 ;
 footnote 3
-"More observation needed to be applied to the dataset to clean up the outliers."
+"More observation needed to be applied to the dataset to analysis the missing data (unknown)."
 ;
 
 *
 Methodology: Compute five-number summaries 
 
-Limitation: This methodology does not account for schools with missing data.
+Limitation: This methodology does not account for victims with missing data.
 
 Possible follow-up steps: More carefully clean the values of the variable 
 Homicide_analytic_file so that the statistics computed do not include any 
@@ -120,38 +118,36 @@ possible illegal values and can better handle missing data.
 
 
 proc means min q1 median q3 max data=Homicide_analytic_file;
-    class Incident;
-    var Victim Race;
+    class Victim_Race;
+    var Incident;
 run;
 title;
 footnote;
 
 
 
-
 title 1
-'Research Question: What are the top thirty states with the highest mean values of perpetrator?'
+'Research Question: What's the spread of the counts of perpetrator corresponding to each state?'
 ;
 
 title 2
 'Rationale: This should help identify the relationship between the states (location) and the perpetrator count.'
 ;
 footnote 1
-'The top thirty states with the highest mean values of perpetratoes are listed in the output.'
+'The maximum count for perpetrator is 10 in New Jersey and Florida.'
 ;
 footnote 2
-'More observation should be applied to the missing data.'
+'More observation should be applied to the missing data because there are some states that have much less observations
+than the other states.'
 ;
 footnote 3
 'We need to clean out the outliers to fit the model better.'
 ;
 
 *
-Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 
+Methodology: Use PROC MEANS to compute the mean of perpetrators from year 
 2000- 2004for State_Name to output the results to a temporary dataset. 
-Use PROC SORT extract and sort just the means the temporary dateset, and use
-PROC PRINT to print just the first thirty observations from the temporary 
-dataset.
+Use SAS to print out the table of the spread perpetrator counts of each states.
 
 Limitations: This methodology does not account for states with missing data.
 
