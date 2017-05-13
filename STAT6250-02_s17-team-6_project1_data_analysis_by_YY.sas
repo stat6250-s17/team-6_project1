@@ -44,7 +44,7 @@ footnote2
 Methodology: Compute five-number summaries by victims age indicator variable.
 
 Limitations: This problem is straight forward, the only draw-back would be if
-the male/female category isn't given so we can't sort them properly.
+the male/female category is not given so we can not sort them properly.
 
 Possible Follow-up Steps: We only need to make sure that both age column
 and male/female are given.
