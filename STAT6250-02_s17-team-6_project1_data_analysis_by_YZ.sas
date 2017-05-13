@@ -103,11 +103,11 @@ title;
 footnote;
 
 title 1
-'Research Question: What are the top thirty states with the highest mean values of perpetratoes?'
+'Research Question: What are the top thirty states with the highest mean values of incidents?'
 ;
 
 title 2
-'Rationale: This should help identify the relationship between the states (location) and the perpetratoes.'
+'Rationale: This should help identify the relationship between the states (location) and the incidents.'
 ;
 footnote 1
 'The top thirty states with the highest mean values of perpetratoes are listed in the output.'
@@ -132,23 +132,18 @@ Possible Follow-up Steps: More carefully clean the values of the variable of
 locations.
 
 
-proc means mean noprint data=Homicide_analytic_file;
-    class States_Name;
-    var Incidence;
-    output out=Homicide_analytic_file_temp;
-
-    var Homicide_analytic_file_temp;
-    output out=Homicide_analytic_file_temp;
-
-
- sort data=FRPM1516_analytic_file_temp(where=(_STAT_="MEAN"));
-    by descending Incidence;
-
-
- print noobs data=Homicide_analytic_file_temp(obs=30);
-    id State_Name;
-    var Incidence;
+proc print
+        noobs
+        data=Homicide_analytic_file_temp(obs=30)
+    ;
+    id
+       State
+    ;
+    var
+        Incident
+    ;
 run;
 title;
 footnote;
+
 
