@@ -54,7 +54,7 @@ Limitations: This methodology does not account for perpetrator sex with missing 
 Possible Follow-up Steps: More carefully clean the values of the variable
 Perpetrator_age so that the statistics computed do not include any
 possible illegal values, and better handle missing data, e.g., by using a
-previous year's data or a rolling average of previous years' data as a proxy.
+previous year data or a rolling average of previous year data as a proxy.
 ;
 
 proc format;
