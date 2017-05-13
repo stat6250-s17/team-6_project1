@@ -26,24 +26,9 @@ deleting row 1-402432 from worksheet "homicide database"
 
 * environmental setup;
 
-* create output formats;
-
-proc format;
-    value $victims_bins
-        "Male"="Male"
-        "Female"="Female"
-    ;	
-
-    value Perpetrator_Age
-        low-<18 = "Q1 Perpetrator_Age" 
-        18-<high = "Q2 Perpetrator_Age"
-    ;
-run;
-
-
 * setup environmental parameters;
 %let inputDatasetURL =
-https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xls
+https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xls?raw=true
 ;
 
 * load raw FRPM dataset over the wire;
@@ -81,17 +66,38 @@ https://github.com/stat6250/team-6_project1/blob/master/Homicide_2000-2014.xls
     xls
 )
 
+filename tempfile TEMP;
+proc http
+    method="get"
+    url="&inputDatasetURL."
+    out=tempfile
+    ;
+run;
+proc import
+    file=tempfile
+    out=homicide_raw
+    dbms=xls;
+run;
+filename tempfile clear;
 
 * check raw Homicide dataset for duplicates with respect to its composite key;
-proc sort
-        nodupkey
-        data=homicide_raw
-        dupout=homicide_raw_dups
-        out=_null_
-    ;
-    by
-        Record ID
-        Year
+proc sort nodupkey data=homicide_raw
+    dupout=homicide_raw_dups out=_null_;
+    by Record_ID;
+run;
+
+
+* create output formats;
+
+proc format;
+    value $victims_bins
+        "Male"="Male"
+        "Female"="Female"
+    ;	
+
+    value Perpetrator_Age
+        0-<18 = "Q1 Perpetrator_Age" 
+        18-<99 = "Q2 Perpetrator_Age"
     ;
 run;
 
@@ -101,26 +107,27 @@ run;
 minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
 data homicide_analytic_file;
-    retain
+	set homicide_raw;
+   	retain
         City
         State
         Year
         Month
         Incident
-        Crime Type
-        Crime Solved
-        Victim Sex
-        Victim Age
-        Victim Race
-        Victim Ethnicity
-        Perpetrator Sex
-        Perpetrator Age
-        Perpetrator Race
-        Perpetrator Ethnicity
+        Crime_Type
+        Crime_Solved
+        Victim_Sex
+        Victim_Age
+        Victim_Race
+        Victim_Ethnicity
+        Perpetrator_Sex
+        Perpetrator_Age
+        Perpetrator_Race
+        Perpetrator_Ethnicity
         Relationship
         Weapon
-        Victim Count
-        Perpetrator Count
+        Victim_Count
+        Perpetrator_Count
     ;
     keep
         City
@@ -128,23 +135,23 @@ data homicide_analytic_file;
         Year
         Month
         Incident
-        Crime Type
-        Crime Solved
-        Victim Sex
-        Victim Age
-        Victim Race
-        Victim Ethnicity
-        Perpetrator Sex
-        Perpetrator Age
-        Perpetrator Race
-        Perpetrator Ethnicity
+        Crime_Type
+        Crime_Solved
+        Victim_Sex
+        Victim_Age
+        Victim_Race
+        Victim_Ethnicity
+        Perpetrator_Sex
+        Perpetrator_Age
+        Perpetrator_Race
+        Perpetrator_Ethnicity
         Relationship
         Weapon
-        Victim Count
-        Perpetrator Count
+        Victim_Count
+        Perpetrator_Count
     ;
-    set homicide_raw;
 run;
+
 
 * 
 Methodology: Use PROC Mean to compute sum the number of Incidence
@@ -162,7 +169,7 @@ proc means
         Year
     ;
     var 
-        Incidence
+        Incident
     ;
     output 
         out=Homicide_temp
@@ -173,7 +180,7 @@ proc sort
         data=Homicide_temp
     ;
     by 
-        ascending Year
+        descending Year
     ;
 run;
     
@@ -185,13 +192,13 @@ is a male vs. female among homicides involving handguns.
 proc means 
         mean
         noprint 
-        data=Homicide_temp
+        data= Homicide_analytic_file
     ;
     class 
         Victim_Sex
     ;
     var 
-        Incidence
+        Incident
     ;
     output 
         out=Homicide_mean_temp
@@ -207,13 +214,13 @@ solved by ethnicity. Use Proc sort to sort from highest to lowest by the mean.
 proc means 
         mean
         noprint
-        data=Homicide_solved_temp
+        data= Homicide_analytic_file
     ;
     class 
         Victim_Ethnicity
     ;
     var 
-        Incidience
+        Incident
     ;
     output 
         out=Homicide_analytic_file_temp
@@ -224,7 +231,7 @@ proc sort
         data=Homicide_analytic_file_temp(where=(_STAT_="MEAN"))
     ;
     by  
-        descending Incidence
+        descending Incident
     ;
 run;
 
