@@ -26,27 +26,29 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 title1
-'Research Question: How does the distribution of Perpetrator age for male perpetrators compare to that of female?'
+'Research Question: What's the distribution of Perpetrator age look like for male perpetrators compare to that of female?'
 ;
 
 title2
-'Rationale: This would help to determine the relationship between the age group of male perpetrators and female perpetrators.'
+'Rationale: This would help to determine the relationship between the age groups of male perpetrators and female perpetrators.'
 ;
 
 footnote1
-'Based on the above output, it shows that in the similar age range, there are more male perpetrators than female perpetrators.'
+'Based on the above output, it shows that in the similar age range, there are much more male perpetrators than female perpetrators.'
 ;
 
 footnote2
-'We can conclude that there are more male perpetrators at the age of and more female perpetrators at the age of .'
+'At the age range from 35 to 50, it obtains the most perpetrators both for male and female .'
 ;
 
 footnote3
-"In addition, more analysis is needed for the group with value 'N/A'."
+"In addition, more analysis is needed for the group with value Unknown because it has about 31.1% counts out of the whole dateset."
 ;
 
 *
-Methodology: Compute five-number summaries by perpetrator_age variable
+Methodology: Compute five-number summaries by perpetrator_age variable. Divide the age range into five groups and compute the counts 
+corresponding to two genders at different levels.
+
 Limitations: This methodology does not account for perpetrator sex with missing data.
 
 Possible Follow-up Steps: More carefully clean the values of the variable
@@ -57,7 +59,7 @@ previous year's data or a rolling average of previous years' data as a proxy.
 
 proc format;
 
-value victim_age_bin
+value perpetrator_age_bin
 
 low-18="Teenager perpetrator age"
 
@@ -87,11 +89,13 @@ footnote;
 
 
 title 1
-'Research Question: Does the outcome shows that the there are more white victims than the other race came across murder in some specific states?'
+'Research Question: Does the outcome shows that the there are more white victims than the other race came across murder in some 
+specific states?'
 ;
 
 title 2
-'Rational: It helps us to determine the relationship between race and state and see if there are more white victims in particular states.'
+'Rational: It helps us to determine the relationship between race and state and see if there are more white victims in particular 
+states.'
 ;
 
 footnote 1
@@ -144,7 +148,7 @@ footnote 3
 
 *
 Methodology: Use PROC MEANS to compute the mean of perpetratoes from year 
-1980- 2014for State_Name to output the results to a temporary dataset. 
+2000- 2004for State_Name to output the results to a temporary dataset. 
 Use PROC SORT extract and sort just the means the temporary dateset, and use
 PROC PRINT to print just the first thirty observations from the temporary 
 dataset.
@@ -155,12 +159,12 @@ Possible Follow-up Steps: More carefully clean the values of the variable of
 locations.
 
 
-proc print
-        noobs
-        data=Homicide_analytic_file_temp(obs=30)
+proc means
+        min q1 median q3 max
+        data=Homicide_analytic_file
     ;
-    id
-       State
+    class
+        State
     ;
     var
         Perpetrator_Count
@@ -168,5 +172,4 @@ proc print
 run;
 title;
 footnote;
-
 
