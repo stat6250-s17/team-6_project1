@@ -5,7 +5,7 @@
 
 *
 This file uses the following analytic dataset to address several research
-questions regarding homicide incidences in the US from 2000-2014.
+questions regarding homicide incidences in the US from 2000-2004.
 
 Dataset Name: Homicide_analytic_file created in external file
 STAT6250-02_s17-team-6_project1_data_preparation.sas, which is assumed to be
@@ -25,45 +25,50 @@ X "cd ""%substr(%sysget(SAS_EXECFILEPATH),1,%eval(%length(%sysget(SAS_EXECFILEPA
 
 
 
-title 1 
-'Research Question: What is the relationship between where the crime take place and the rate of the solved crimes?'
+title1
+'Research Question: How does the distribution of Perpetrator age for male perpetrators compare to that of female?'
 ;
 
-title 2
-'Rational: It helps to determine whether the geographic environment will have positive/negative impact on the case solving.'
+title2
+'Rationale: This would help to determine the relationship between the age group of male perpetrators and female perpetrators.'
 ;
-footnote 1
-'It seems that there's no obvious relationship between the crime take place and the rate of the solved crimes.'
+
+footnote1
+'Based on the above output, it shows that in the similar age range, there are more male perpetrators than female perpetrators.'
 ;
-footnote 2
-'The points are clustered in groups and no correlationship is shown.'
+
+footnote2
+'We can conclude that there are more perpetrators at the age in the range of .'
 ;
-footnote 3
-"In addition, more analysis is needed for this problem."
+
+footnote3
+"In addition, more analysis is needed for the group with value 'N/A'."
 ;
 
 *
-Methodology: Use PROC Freq to compute sum the number of solved crimes for
-each year corresponds to the cities that the crime took place.
-Run a scatterplot and check assumption.
+Methodology: Compute five-number summaries by perpetrator_age variable
+Limitations: This methodology does not account for perpetrator sex with missing data.
 
-Limitation: There might exist missing data and other environmental factors
-that will cause bias, such as the migration rate of the resident.
-
-Possible follow-up steps: Clean out the outliers in the data and ignore 
-the "noises" in some situation. Make adjustment to the data set and apply 
-the abline to the output.
+Possible Follow-up Steps: More carefully clean the values of the variable
+Perpetrator_age so that the statistics computed do not include any
+possible illegal values, and better handle missing data, e.g., by using a
+previous year's data or a rolling average of previous years' data as a proxy.
 ;
 
-proc freq data=Homicide_analytic_file;
-    tables Crime Solved;
-    var City;
-    output out=Homicide_analytic_file_temp;
-    univariate data=Homicide_analytic_file; 
-    var Crime Solved City;
+proc means
+        min q1 median q3 max
+        data=Homicide_analytic_file_temp
+    ;
+    class
+        Perpetrator_Sex
+    ;
+    var
+        Perpetrator_Age
+    ;
 run;
 title;
 footnote;
+
 
 
 
@@ -102,12 +107,14 @@ run;
 title;
 footnote;
 
+
+
 title 1
-'Research Question: What are the top thirty states with the highest mean values of incidents?'
+'Research Question: What are the top thirty states with the highest mean values of perpetrator?'
 ;
 
 title 2
-'Rationale: This should help identify the relationship between the states (location) and the incidents.'
+'Rationale: This should help identify the relationship between the states (location) and the perpetrator count.'
 ;
 footnote 1
 'The top thirty states with the highest mean values of perpetratoes are listed in the output.'
@@ -140,7 +147,7 @@ proc print
        State
     ;
     var
-        Incident
+        Perpetrator_Count
     ;
 run;
 title;
