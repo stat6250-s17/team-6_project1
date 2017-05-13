@@ -125,9 +125,7 @@ run;
 title;
 footnote;
 
-　
 
-　
 
 title1
 'Research Question: What the percentage of the perpetrator who is less than 18 years old?'
@@ -145,7 +143,6 @@ footnote2
 'Moreover, we can see that the number and percentage of perpetrators who under 18 years old (that is 2,750, 4.2%), and the number and percentage of perpetrators who over 18 years old (that is 38,541, 58.81%)'
 ;
 *
-
 Methodology: Compute five-number summaries by Perpetrators age indicator
 variable. Create formats to bin values of Perpetrator_Age_bin, categorize
 the variable "Perpetrator Age" into two groups, "under 18" and "over 18”.
