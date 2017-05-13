@@ -38,7 +38,7 @@ footnote1
 ;
 
 footnote2
-'We can conclude that there are more perpetrators at the age in the range of .'
+'We can conclude that there are more male perpetrators at the age of and more female perpetrators at the age of .'
 ;
 
 footnote3
@@ -91,11 +91,11 @@ title 1
 ;
 
 title 2
-'Rational: It helps us to determine the relationship between race and state.'
+'Rational: It helps us to determine the relationship between race and state and see if there are more white victims in particular states.'
 ;
 
 footnote 1
-'The output shows that there's correlationship between the two variables.'
+'The output shows that there's more white victims in ... and more black vitims in....'
 ;
 footnote 2
 'The correlationship between the two variables are positive.'
