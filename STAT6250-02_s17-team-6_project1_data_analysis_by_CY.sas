@@ -37,13 +37,17 @@ footnote1
 'California has the most number of homicides from 2000-2004.' 
 ;
 
+footnote2
+'However, the number of crimes solved vs. not solved is something to note. 60% of the crimes are solved in California but only 48% of crimes in Illnois are solved.' 
+;
+
 *
 Methodlogy: Use PROC PRINT to print the number of incidences by state 
 from the temporary dataset created in the data-prep file.
 
 limitations: This methodology does not take into consideration the population size of the state.
 
-Possible Follow-up Steps: Take into consideration the size of the state's population to .
+Possible Follow-up Steps: Take into consideration the size of the state population size to calculate number of homicides per 100k people.
 ;
 
 proc freq data=homicide_analytic_file order=freq
@@ -67,7 +71,7 @@ title2
 ;
 
 footnote1
-'The number of incidences involving a male victim and a gun is about 7x greater than number of incidences involving a female victim and a gun'
+'The number of incidences involving a male victim and a gun is about 6x greater than number of incidences involving a female victim and a gun'
 ;
 
 footnote2
@@ -94,9 +98,6 @@ proc freq data=homicide_analytic_file order=freq
     ;
     table 
        Weapon*Victim_Sex
-    ;
-    title
-        'Weapon used in homicide by victim's gender'
     ;
 run;
 title;
@@ -137,9 +138,6 @@ proc freq data=homicide_analytic_file order=freq
     ;
     table 
         Victim_Race*Crime_Solved
-    ;
-    title
-        'Number of homicides solved by ethnicity'
     ;
 run;
 title;
