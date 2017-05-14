@@ -42,7 +42,7 @@ footnote2
 ;
 
 footnote3
-"In addition, more analysis is needed for the group with value Unknown because it has about 31.1% counts out of the whole dateset."
+'In addition, more analysis is needed for the group with value Unknown because it has about 31.1% counts out of the whole dateset.'
 ;
 
 *
@@ -103,7 +103,7 @@ footnote 2
 'The output shows that the Native American and Alaska Native has the least victims (incidents).'
 ;
 footnote 3
-"More observation needed to be applied to the dataset to analysis the missing data (unknown)."
+'More observation needed to be applied to the dataset to analysis the missing data (unknown).'
 ;
 
 *
