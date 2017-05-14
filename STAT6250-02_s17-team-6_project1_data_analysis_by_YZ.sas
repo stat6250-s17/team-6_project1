@@ -88,21 +88,21 @@ footnote;
 
 
 
-title 1
+title1
 'Research Question: What is the relationship between victim race and the number of incidents?'
 ;
 
-title 2
+title2
 'Rational: It helps us to learn if it appears more victims in some particular races than the other.'
 ;
 
-footnote 1
+footnote1
 'The output shows that there is more white victims than black victims.'
 ;
-footnote 2
+footnote2
 'The output shows that the Native American and Alaska Native has the least victims (incidents).'
 ;
-footnote 3
+footnote3
 'More observation needed to be applied to the dataset to analysis the missing data (unknown).'
 ;
 
@@ -125,21 +125,21 @@ footnote;
 
 
 
-title 1
+title1
 'Research Question: What is the spread of the counts of perpetrator corresponding to each state?'
 ;
 
-title 2
+title2
 'Rationale: This should help identify the relationship between the states (location) and the perpetrator count.'
 ;
-footnote 1
+footnote1
 'The maximum count for perpetrator is 10 in New Jersey and Florida.'
 ;
-footnote 2
+footnote2
 'More observation should be applied to the missing data because there are some states that have much less observations
 than the other states.'
 ;
-footnote 3
+footnote3
 'We need to clean out the outliers to fit the model better.'
 ;
 
