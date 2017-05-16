@@ -99,9 +99,11 @@ title2
 footnote1
 'The output shows that there is more white victims than black victims.'
 ;
+
 footnote2
 'The output shows that the Native American and Alaska Native has the least victims (incidents).'
 ;
+
 footnote3
 'More observation needed to be applied to the dataset to analysis the missing data (unknown).'
 ;
@@ -132,13 +134,16 @@ title1
 title2
 'Rationale: This should help identify the relationship between the states (location) and the perpetrator count.'
 ;
+
 footnote1
 'The maximum count for perpetrator is 10 in New Jersey and Florida.'
 ;
+
 footnote2
 'More observation should be applied to the missing data because there are some states that have much less observations
 than the other states.'
 ;
+
 footnote3
 'We need to clean out the outliers to fit the model better.'
 ;
