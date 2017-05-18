@@ -126,7 +126,7 @@ footnote;
 
 
 title1
-'Research Question: What is the spread of the counts of perpetrator corresponding to each state?'
+'Research Question: What is the distribution of the counts of perpetrator corresponding to each state?'
 ;
 
 title2
